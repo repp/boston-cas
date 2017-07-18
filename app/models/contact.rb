@@ -54,5 +54,10 @@ class Contact < ActiveRecord::Base
       .or(arel_table[:role].matches(query))
     )
   end
+
+  # all columns which aren't foreign keys, the primary key, or the standard timestamps
+  def self.exportable_columns
+    @exportable_columns ||= column_names.reject{ |cn| cn =~ /(?<![a-z])id(?![a-z])|^(?:created|updated|deleted)_at$/ }
+  end
   
 end

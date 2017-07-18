@@ -33,6 +33,21 @@ module Warehouse
             else
               nil
             end
+            contacts = %i(
+              client_contacts
+              dnd_staff_contacts
+              housing_subsidy_admin_contacts
+              shelter_agency_contacts
+              ssp_contacts
+            ).map do |column|
+              [
+                column,
+                # just keep the relevant columns
+                match.send(column).map do |contact|
+                  contact.attributes.slice(*Contact.exportable_columns).map{ |k,v| [ k, v.presence ] }.to_h
+                end
+              ]
+            end.to_h
             decisions.each_with_index do |decision, idx|
               if previous_updated_at
                 elapsed_days = ( decision.updated_at.to_date - previous_updated_at.to_date ).to_i
@@ -67,7 +82,8 @@ module Warehouse
                 client_spoken_with_services_agency: decision.client_spoken_with_services_agency,
                 cori_release_form_submitted: decision.cori_release_form_submitted,
                 match_started_at: match_started_at,
-                program_type: sub_program.program_type
+                program_type: sub_program.program_type,
+                **contacts
               )
               previous_updated_at = decision.updated_at
             end
