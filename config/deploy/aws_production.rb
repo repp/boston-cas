@@ -6,11 +6,6 @@ raise "You must specify DEPLOY_USER" if ENV['DEPLOY_USER'].to_s == ''
 set :branch, 'master'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Delayed Job
-set :delayed_job_workers, 2
-set :delayed_job_prefix, "#{ENV['CLIENT']}-cas"
-set :delayed_job_roles, [:job]
-
 puts "Allowable hosts: #{ENV['HOSTS']}"
 puts "Hosts specified for deployment: #{ENV['HOST1']} #{ENV['HOST2']} #{ENV['HOST3']}"
 
