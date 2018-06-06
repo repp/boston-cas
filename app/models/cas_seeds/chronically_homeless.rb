@@ -4,7 +4,7 @@ module CasSeeds
     require 'json'
 
     def run!
-      csv = CSV.read('db/project_clients.csv', headers: true, encoding: 'bom|utf-8')
+      csv = CSV.read('config/formatted_slc_clients.csv', headers: true, encoding: 'bom|utf-8')
       Rails.logger.info "Importing #{csv.length} Chronically Homeless Clients"
       csv.each do |row|
         # Rails.logger.info row
