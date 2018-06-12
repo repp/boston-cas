@@ -14,8 +14,9 @@ module CasSeeds
         # sources via one CSV.  
         # TODO: when we have this hooked up to actual data sources we'll need to go back 
         # and connect folks to the appropriate source data
-        c = ProjectClient.where(id_in_data_source: row['CLID'], data_source_id_column_name: 'none', data_source_id: 0).first_or_create
-        c.assign_attributes row.to_hash.except('CLID')
+        #c = ProjectClient.where(id_in_data_source: row['CLID'], data_source_id_column_name: 'none', data_source_id: 0).first_or_create
+        c = ProjectClient.where(id: row['id']).first_or_create
+        c.assign_attributes row.to_hash.except('id')
         c.save!
       end
       Rails.logger.info 'Added Chronically Homeless Clients'
