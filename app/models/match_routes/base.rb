@@ -9,6 +9,10 @@ module MatchRoutes
         order(weight: :asc)
     end
 
+    scope :should_cancel_other_matches, -> do
+      where(should_cancel_other_matches: true)
+    end
+
     def self.all_routes
       [
         MatchRoutes::Default,
@@ -67,6 +71,14 @@ module MatchRoutes
 
     def self.max_matches_per_opportunity
       20
+    end
+
+    def required_contact_types
+      [
+        'shelter_agency',
+        'dnd_staff',
+        'housing_subsidy_admin',
+      ]
     end
   end
 end

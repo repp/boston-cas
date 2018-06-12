@@ -27,7 +27,7 @@ module Cas
 
     def update_existing_clients
       count = ProjectClient.has_client.update_pending.count
-      puts "Updating #{count} clients"
+      # puts "Updating #{count} clients"
       ProjectClient.has_client.update_pending.each do |project_client|
         client = project_client.client
         attrs = attributes_for_client(project_client)
@@ -41,7 +41,7 @@ module Cas
 
     def add_missing_clients
       count = ProjectClient.needs_client.count
-      puts "Adding #{count} clients"
+      # puts "Adding #{count} clients"
       ProjectClient.needs_client.each do |project_client|
         c = Client.create(attributes_for_client(project_client))
         # make note of our new connection in project_clients
@@ -54,7 +54,7 @@ module Cas
       project_client_client_ids = ProjectClient.available.has_client.pluck(:client_id)
 
       clients_to_de_activate = clients - project_client_client_ids
-      puts "Deactivating or deleting #{clients_to_de_activate.count}"
+      # puts "Deactivating or deleting #{clients_to_de_activate.count}"
       Client.where(id: clients_to_de_activate).update_all(available: false)
       Client.where(id: clients_to_de_activate).each do |client|
         # remove anyone who never really participated
@@ -153,6 +153,7 @@ module Cas
         :child_in_household,
         :days_homeless,
         :days_homeless_in_last_three_years,
+        :days_literally_homeless_in_last_three_years,
         :ha_eligible,
         :cspech_eligible,
         :income_total_monthly,
@@ -160,7 +161,17 @@ module Cas
         :congregate_housing,
         :sober_housing,
         :enrolled_project_ids,
-        :active_cohort_ids
+        :active_cohort_ids,
+        :assessment_score,
+        :ssvf_eligible,
+        :rrh_desired,
+        :youth_rrh_desired,
+        :rrh_assessment_contact_info,
+        :rrh_assessment_collected_at,
+        :enrolled_in_th,
+        :enrolled_in_sh,
+        :enrolled_in_so,
+        :enrolled_in_es,
       ]
     end
 
