@@ -13,6 +13,8 @@
       %th Email
       %th Phone
       %th Role
+      - if @contact_owner.kind_of?(Building)
+        %th Owner
       %th Edit
       %th
   %tbody
@@ -26,6 +28,8 @@
         %td{'data-deleted' => contact_join_model.deleted?}= contact_join_model.contact_email
         %td{'data-deleted' => contact_join_model.deleted?}= contact_join_model.contact_phone
         %td{'data-deleted' => contact_join_model.deleted?}= contact_join_model.contact_role
+        - if @contact_owner.kind_of?(Building)
+          %td{'data-deleted' => contact_join_model.deleted?}= checkmark contact_join_model.contact.is_building_owner
         %td
           - unless contact_join_model.deleted?
             = link_to 'Edit', {action: :edit, id: contact_join_model}
