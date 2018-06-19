@@ -1,4 +1,4 @@
-= simple_form_for form_for_arg do |f|
+= simple_form_for form_for_arg, {data: {contact: true}} do |f|
   = f.error_notification
   - disabled = false
   - hint = ''
@@ -10,7 +10,14 @@
     = f.input :email, as: :email, required: true, disabled: disabled
     = f.input :phone, required: true, disabled: disabled
     = f.input :cell_phone, required: false, disabled: disabled
+    = f.input :is_building_owner, label: 'Is a building owner?', required: false, disabled: disabled, wrapper_class: 'cSectionToggle', wrapper_html: {data: {target: 'building-owner-inputs'}}
+  .building-owner-inputs(style="display: #{@contact.is_building_owner ? 'block' : 'none'};")
+    = f.input :owner_identifier, required: false, disabled: disabled
+    = f.input :business_name, label: 'Business (Legal) Name', required: false, disabled: disabled
+    = f.input :address, required: false, disabled: disabled
+    = f.input :city, required: false, disabled: disabled
+    = f.input :state, required: false, disabled: disabled
+    = f.input :zip_code, required: false, disabled: disabled
 
   .form-actions
     = f.button :submit
-

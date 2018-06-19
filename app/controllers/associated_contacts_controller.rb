@@ -108,7 +108,14 @@ class AssociatedContactsController < ApplicationController
           :role,
           :email,
           :phone,
-          :cell_phone
+          :cell_phone,
+          :is_building_owner,
+          :owner_identifier,
+          :business_name,
+          :address,
+          :city,
+          :state,
+          :zip_code
         ]
       )
     end

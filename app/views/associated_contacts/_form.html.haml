@@ -2,6 +2,7 @@
   = form.error_notification
   - disabled = false
   - hint = ''
+  - contact = @contact_join_model.contact
   .form-inputs
     = form.simple_fields_for :contact do |contact_fields|
       = contact_fields.input :first_name, disabled: disabled, hint: hint
@@ -10,6 +11,14 @@
       = contact_fields.input :email, as: :email, disabled: disabled
       = contact_fields.input :phone, disabled: disabled
       = contact_fields.input :cell_phone, disabled: disabled
+      = contact_fields.input :is_building_owner, label: 'Is a building owner?', required: false, disabled: disabled, wrapper_class: 'cSectionToggle', wrapper_html: {data: {target: 'building-owner-inputs'}}
+      .building-owner-inputs(style="display: #{(contact.present? and contact.is_building_owner) ? 'block' : 'none'};")
+        = contact_fields.input :owner_identifier, required: false, disabled: disabled
+        = contact_fields.input :business_name, label: 'Business (Legal) Name', required: false, disabled: disabled
+        = contact_fields.input :address, required: false, disabled: disabled
+        = contact_fields.input :city, required: false, disabled: disabled
+        = contact_fields.input :state, required: false, disabled: disabled
+        = contact_fields.input :zip_code, required: false, disabled: disabled
 
   .form-actions
     = form.submit 'Save', class: 'btn btn-success'

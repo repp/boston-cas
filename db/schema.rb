@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529161403) do
+ActiveRecord::Schema.define(version: 20180619161203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,8 +227,8 @@ ActiveRecord::Schema.define(version: 20180529161403) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.datetime "deleted_at"
     t.string   "role"
     t.integer  "id_in_data_source"
@@ -238,9 +238,17 @@ ActiveRecord::Schema.define(version: 20180529161403) do
     t.string   "role_in_organization"
     t.string   "cell_phone"
     t.string   "middle_name"
+    t.boolean  "is_building_owner",          default: false
+    t.integer  "owner_identifier"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "business_name"
   end
 
   add_index "contacts", ["deleted_at"], name: "index_contacts_on_deleted_at", using: :btree
+  add_index "contacts", ["owner_identifier"], name: "index_contacts_on_owner_identifier", unique: true, using: :btree
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
 
   create_table "data_sources", force: :cascade do |t|

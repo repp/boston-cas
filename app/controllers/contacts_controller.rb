@@ -80,6 +80,13 @@ class ContactsController < ApplicationController
         :phone,
         :cell_phone,
         :role,
+        :is_building_owner,
+        :owner_identifier,
+        :business_name,
+        :address,
+        :city,
+        :state,
+        :zip_code
       )
     end
 
