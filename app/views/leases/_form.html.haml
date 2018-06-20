@@ -1,0 +1,13 @@
+= simple_form_for [@lease] , {data: {lease: true}} do |f|
+  = f.error_notification
+  - disabled = false
+  - hint = ''
+  .form-inputs
+    = f.input :elite_lease_id, label: 'Elite Lease Identifier', required: true, disabled: disabled, hint: hint
+    = f.input :rent_total, required: true, disabled: disabled
+    = f.input :rent_program_paid, label: 'Rent Paid by Program', required: true, disabled: disabled
+    = f.association :owner, label: 'Property Owner', :collection => Contact.building_owners, required: true, disabled: disabled
+    = f.input :lease_updated_at, as: :date_picker, label: 'Lease Last Updated', input_html: {value: Date.today}
+
+  .form-actions
+    = f.button :submit

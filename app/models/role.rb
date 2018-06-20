@@ -49,6 +49,8 @@ class Role < ActiveRecord::Base
       :can_add_vacancies,
       :can_view_contacts,
       :can_edit_contacts,
+      :can_view_leases,
+      :can_edit_leases,
       :can_view_rule_list,
       :can_edit_rule_list,
       :can_view_available_services,

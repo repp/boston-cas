@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   end
 
   resources :contacts, except: :show
+  resources :leases, except: :show
   resources :units, except: :show, concerns: [:restorable]
   resources :programs do
     resources :sub_programs, only: [:new, :edit, :create, :update, :destroy] do

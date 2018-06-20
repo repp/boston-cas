@@ -16,6 +16,10 @@ en:
       default: "%b %e, %Y %l:%M %P"
   datepicker:
     dformat: '%b %e, %Y'
+  leases:
+    index:
+      title: 'Manage Leases'
+      search_prompt: 'Search leases...'
   contacts:
     index:
       title: 'Manage Contacts'

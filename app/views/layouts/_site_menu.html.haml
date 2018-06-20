@@ -27,6 +27,10 @@
         %li.o-menu__item
           = link_to opportunities_path, class: 'o-menu__link' do
             Vacancies
+      - if can_view_leases?
+        %li.o-menu__item
+          = link_to leases_path, class: 'o-menu__link' do
+            Leases
       - if can_view_programs?
         %li.o-menu__item
           = link_to programs_path, class: 'o-menu__link' do

@@ -1,0 +1,46 @@
+.o-page__title
+  %h1= t '.title'
+  - if can_edit_leases?
+    = link_to new_lease_path, class: 'btn btn-primary ml-auto' do
+      %span.icon-plus
+      New Lease
+
+- @prompt = t '.search_prompt'
+.row
+  .col-sm-4
+    = render 'search_form'
+:ruby
+  columns = ['elite_lease_id', 'rent_total']
+  column_labels = {'elite_lease_id':'Elite Lease Identifier', 'rent_total':'Total Rent', 'updated_at': 'Lease Updated At'}
+  directions = current_sort_order(Hash[columns.map {|x| [x, nil]}])
+  titles = column_labels
+  #directions.each {| k,v | titles[k] = @leases.human_attribute_name(k)}
+  #directions.each {| k,v | titles[k] = column_labels[k]}
+.row.table-utilities
+  .col-sm-8
+    %p= page_entries_info @leases
+
+.row
+  .col-sm-12
+    .table-responsive
+      %table.table.table-condensed.table-hover
+        %thead
+          %tr
+            - titles.each do | k, title |
+              %th
+                = manual_sort_link(titles[k], k, directions)
+                %i{:class => ["fa", "fa-sort-#{directions[k]}"] }
+            %th Edit
+        %tbody
+          - @leases.each do |c|
+            %tr
+              %td
+                = c.elite_lease_id
+              %td
+                = number_to_currency c.rent_total
+              %td
+                = c.lease_updated_at.to_date
+              %td
+                = link_to 'Edit', edit_lease_path(c)
+
+    %p= paginate @leases

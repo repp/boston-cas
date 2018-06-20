@@ -1,0 +1,12 @@
+= render 'breadcrumbs'
+.row
+  .col-sm-12
+    %h1
+      Edit Lease
+      = @lease.elite_lease_id
+
+.row
+  .col-sm-8
+    = render 'form'
+    %p.delete
+      = link_to "Delete #{@lease.elite_lease_id}", {action: :destroy, id: @lease}, method: :delete, data: {confirm: "Really delete this lease?"}

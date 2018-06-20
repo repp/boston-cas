@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619161203) do
+ActiveRecord::Schema.define(version: 20180620164617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -379,6 +379,19 @@ ActiveRecord::Schema.define(version: 20180619161203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "leases", force: :cascade do |t|
+    t.integer  "elite_lease_id"
+    t.decimal  "rent_total"
+    t.decimal  "rent_program_paid"
+    t.integer  "owner_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.datetime "deleted_at"
+    t.datetime "lease_updated_at"
+  end
+
+  add_index "leases", ["owner_id"], name: "index_leases_on_owner_id", using: :btree
 
   create_table "letsencrypt_plugin_challenges", force: :cascade do |t|
     t.text     "response"
@@ -817,6 +830,8 @@ ActiveRecord::Schema.define(version: 20180619161203) do
     t.boolean  "can_enter_deidentified_clients",          default: false
     t.boolean  "can_manage_deidentified_clients",         default: false
     t.boolean  "can_add_cohorts_to_deidentified_clients", default: false
+    t.boolean  "can_view_leases",                         default: false, null: false
+    t.boolean  "can_edit_leases",                         default: false, null: false
   end
 
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
@@ -1074,6 +1089,7 @@ ActiveRecord::Schema.define(version: 20180619161203) do
   add_index "vouchers", ["sub_program_id"], name: "index_vouchers_on_sub_program_id", using: :btree
   add_index "vouchers", ["unit_id"], name: "index_vouchers_on_unit_id", using: :btree
 
+  add_foreign_key "leases", "contacts", column: "owner_id"
   add_foreign_key "opportunities", "vouchers"
   add_foreign_key "programs", "contacts"
   add_foreign_key "programs", "funding_sources"
