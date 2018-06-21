@@ -72,5 +72,3 @@ app/assets/images/theme/icons
 app/views/root/_homepage_content.haml
 config/formatted_slc_clients.csv
 config/formatted_slc_owners.csv
-config/formatted_slc_leases.csv
-config/formatted_slc_leases.csv
