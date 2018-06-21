@@ -6,6 +6,9 @@ class Lease < ActiveRecord::Base
   acts_as_paranoid
   has_paper_trail
 
+  def rent_tenant_paid
+     rent_total - rent_program_paid
+  end
 
   def self.text_search(text)
     return none unless text.present?
