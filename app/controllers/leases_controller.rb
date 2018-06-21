@@ -27,7 +27,7 @@ class LeasesController < ApplicationController
   def create
     @lease = lease_scope.new lease_params
     if @lease.save
-      redirect_to action: :index, notice: 'New contact created'
+      redirect_to action: :index, notice: 'New lease created'
     else
       flash[:error] = 'Please review the form problems below.'
       render :new
@@ -72,6 +72,7 @@ class LeasesController < ApplicationController
         :elite_lease_id,
         :rent_total,
         :rent_program_paid,
+        :utility_allowance,
         :owner_id,
         :owner,
         :lease_updated_at

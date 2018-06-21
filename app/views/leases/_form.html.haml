@@ -6,6 +6,7 @@
     = f.input :elite_lease_id, label: 'Elite Lease Identifier', required: true, disabled: disabled, hint: hint
     = f.input :rent_total, required: true, disabled: disabled
     = f.input :rent_program_paid, label: 'Rent Paid by Program', required: true, disabled: disabled
+    = f.input :utility_allowance, required: true, disabled: disabled
     = f.association :owner, label: 'Property Owner', :collection => Contact.building_owners, required: true, disabled: disabled
     = f.input :lease_updated_at, as: :date_picker, label: 'Leased through'
 

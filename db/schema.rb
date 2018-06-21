@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620164617) do
+ActiveRecord::Schema.define(version: 20180621152156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(version: 20180620164617) do
     t.string   "cell_phone"
     t.string   "middle_name"
     t.boolean  "is_building_owner",          default: false
-    t.integer  "owner_identifier"
+    t.string   "owner_identifier"
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -381,7 +381,7 @@ ActiveRecord::Schema.define(version: 20180620164617) do
   end
 
   create_table "leases", force: :cascade do |t|
-    t.integer  "elite_lease_id"
+    t.string   "elite_lease_id"
     t.decimal  "rent_total"
     t.decimal  "rent_program_paid"
     t.integer  "owner_id"
@@ -389,6 +389,7 @@ ActiveRecord::Schema.define(version: 20180620164617) do
     t.datetime "updated_at",        null: false
     t.datetime "deleted_at"
     t.datetime "lease_updated_at"
+    t.decimal  "utility_allowance"
   end
 
   add_index "leases", ["owner_id"], name: "index_leases_on_owner_id", using: :btree

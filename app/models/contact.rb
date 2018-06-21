@@ -24,10 +24,10 @@ class Contact < ActiveRecord::Base
   scope :building_owners, -> { where(is_building_owner: true) }
 
   acts_as_paranoid
-  has_paper_trail
+  has_paper_trail 
 
   def full_name
-    [first_name, last_name].compact.join " "
+    [first_name, last_name].compact.join(" ")
   end
   alias_method :name, :full_name
 
@@ -46,6 +46,7 @@ class Contact < ActiveRecord::Base
     where(
       arel_table[:first_name].matches(query)
       .or(arel_table[:last_name].matches(query))
+      .or(arel_table[:business_name].matches(query))
       .or(arel_table[:email].matches(query))
       .or(arel_table[:phone].matches(query))
       .or(arel_table[:cell_phone].matches(query))
